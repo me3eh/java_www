@@ -21,14 +21,10 @@ public class Forget extends HttpServlet {
         HttpSession session = request.getSession();
         for(int i=0;i<cookies.length;i++){
             Cookie cookie=cookies[i];
-
-            System.out.println( cookie.getName() );
-
-            System.out.println(cookie.getName() );
             if(cookie.getName().equals("login")){
                 cookie.setMaxAge(0);
                 response.addCookie( cookie );
-                session.setAttribute("yep", "Brak ciasteczka");
+                session.setAttribute("loginCookie", "Brak ciasteczka");
                 break;
             }
         }

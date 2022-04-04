@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<p>${yep}</p>
+<p>${loginCookie}</p>
 <form name="forgetForm" method="post" action="forget">
     <input type="submit" value="logout" />
 </form>

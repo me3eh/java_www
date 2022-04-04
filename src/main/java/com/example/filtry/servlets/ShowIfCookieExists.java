@@ -18,13 +18,13 @@ public class ShowIfCookieExists extends HttpServlet {
             if(cookie.getName().equals("login")){
                 String login=cookie.getValue();
                 System.out.println(login);
-                session.setAttribute("yep", login);
+                session.setAttribute("loginCookie", login);
                 got = true;
                 break;
             }
         }
         if( !got )
-            session.setAttribute("yep", "Brak ciasteczka");
+            session.setAttribute("loginCookie", "Brak ciasteczka");
         request.getRequestDispatcher("forgetCookie.jsp").forward(request, response);
     }
 
