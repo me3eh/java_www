@@ -1,18 +1,12 @@
 package com.example.store3.controllers;
 
 import com.example.store3.data.Item;
-import com.example.store3.data.ItemCategory;
+import com.example.store3.data.ItemForForm;
 import com.example.store3.data.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.LinkedList;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/items")
@@ -27,7 +21,8 @@ public class ItemController {
     @GetMapping("/")
     public String getItems(Model model) {
         model.addAttribute("items", items.getItems());
-        System.out.println("Items " + items.getItems());
+        model.addAttribute("itemForForm", new ItemForForm());
+        model.addAttribute("categories", items.getCategories());
         return "items";
     }
 
@@ -43,6 +38,19 @@ public class ItemController {
         model.addAttribute("item", this.items.getItem(id));
         return "item";
     }
+    @PostMapping("/addItem")
+    public String addItem(@ModelAttribute ItemForForm itemForForm, Model model) {
+        Item item =
+            new Item(itemForForm.getName(), itemForForm.getPrice(), itemForForm.getCategoryName() );
+        items.addItem( item );
+        model.addAttribute("items", items.getItems());
 
+        return "redirect:/items/";
+    }
+    @DeleteMapping(value = "/deleteItem/{id}")
+    public String deletePost(@PathVariable("id") int id) {
+        items.removeItem(id);
+        return "redirect:/items/";
+    }
 
 }

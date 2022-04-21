@@ -7,4 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ItemCategory {
     private final String name;
+    public String toString(){
+        return name;
+    }
 }
