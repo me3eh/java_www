@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/categoryItem")
+@RequestMapping("/category")
 public class CategoryController {
     @Autowired
     ItemRepository items;
@@ -53,12 +53,12 @@ public class CategoryController {
     @GetMapping("/add")
     public String addItemForm(Model model) {
         model.addAttribute("itemCategoryForForm", new ItemCategoryForForm());
-        model.addAttribute("categories", items.getCategories());
-        return "itemForm";
+        return "categoryForm";
     }
 
     @PostMapping("/add")
     public String addCategory(@ModelAttribute ItemCategoryForForm categoryForForm, Model model) {
+        System.out.println(categoryForForm.getName());
         ItemCategory itemCategory = new ItemCategory(categoryForForm.getName());
 
         Validator validator = validatorFactory.getValidator();
@@ -71,7 +71,6 @@ public class CategoryController {
                 System.out.println(violation.getMessage());
                 messages.add(violation.getMessage());
             }
-
             model.addAttribute("itemForForm", new ItemCategoryForForm());
             model.addAttribute("categories", items.getCategories());
             model.addAttribute("error", messages);
