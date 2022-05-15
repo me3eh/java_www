@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lmao</title>
+</head>
+<style>
+table, th, td {
+    border:1px solid black;
+}
+</style>
+<body>
+
+<div th:if="${!cartItems.isEmpty()}">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Single price</th>
+            <th>Price summed</th>
+        </tr>
+        <tr th:each="prod : ${cartItems}">
+            <br>
+            <td th:text="${prod.key.getName()}">Onions</td>
+            <td th:text="${prod.value}">Onions</td>
+            <td th:text="${prod.key.getPrice()}">Onions</td>
+            <th:block th:with="var = ${ prod.key.getPrice() * prod.value}">
+                <td th:text="${var}">rr</td>
+            </th:block>
+        </tr>
+        <tr>
+            <td colspan="2">Your cart value is:</td>
+            <td colspan="2" style="text-align: center;" th:text="${cartPrice}"></td>
+        </tr>
+    </table>
+</div>
+
+<div th:if="${cartItems.isEmpty()}">
+    <p>Your cart is empty</p>
+</div>
+
+<form action="#" th:action="@{/cart/newCart}" method="post">
+    <p><input type="submit" value="Submit" /></p>
+</form>
+
+<a th:href="@{allCarts}">Display all realized carts</a>
+
+</body>
+</html>

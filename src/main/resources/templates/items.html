@@ -14,18 +14,13 @@
             <input type="hidden" name="_method" value="delete" />
             <button type="submit" >Delete</button>
         </form>
+<!--        <form action="#" th:action="@{'/cart/addItemToCart')}" th:method="post">-->
+        <form action="#" th:action="@{'/cart/addToCart/{id}'(id=${iter.index})}" th:object="${itemForForm}" method="post">
+            <p><input type="submit" value="Submit" /></p>
+        </form>
     </span>
 </ol>
-    <form action="#" th:action="@{/items/addItem}" th:object="${itemForForm}" method="post">
-        <p>Name: <input type="text" th:field="*{name}" onkeydown="return /[a-z]/i.test(event.key)" /></p>
-        <p>Price: <input type="number" th:field="*{price}" min="0.00" max="10000.00" step="0.01"/></p>
-        <span>Category:
-            <select th:field="*{categoryName}">
-                <option th:each="i : ${categories}" th:value="${i}" th:text="${i.getName()}">
-                </option>
-            </select>
-        </span>
-        <p><input type="submit" value="Submit" /></p>
-    </form>
+<a th:href="@{addItem}">Add item</a>
+
 </body>
 </html>

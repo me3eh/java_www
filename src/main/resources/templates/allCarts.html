@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Old carts</h1>
+
+<tr th:each="cart, iter : ${oldCarts}">
+    <h2 th:text="${'Koszyk numer: ' + iter.index}">Koszyk numer</h2>
+    <div th:each="item : ${cart}">
+        <th th:text="${item.key.getName()}">
+        <th th:text="${item.key.getPrice()}">
+        <th th:text="${'Ilosc' + item.value}">
+    </div>
+</tr>
+</body>
+</html>
