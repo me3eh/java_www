@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/items")
-public class ItemController {
+@RequestMapping("/categoryItem")
+public class CategoryController {
     @Autowired
     ItemRepository items;
 
@@ -25,7 +25,7 @@ public class ItemController {
     CartRepository cartItems;
     ValidatorFactory validatorFactory;
 
-    public ItemController() {
+    public CategoryController() {
         validatorFactory = Validation.byDefaultProvider()
                 .configure()
                 .messageInterpolator(new ParameterMessageInterpolator())
@@ -44,47 +44,41 @@ public class ItemController {
         return "items";
     }
 
-    @GetMapping("/category")
-    public String getItemsFromCategory(@RequestParam(value = "name", defaultValue = "snacks") String category, Model model) {
-        model.addAttribute("items", this.items.getItemsFromCategory(category));
-        model.addAttribute("category", category);
-        return "items";
-    }
-
     @GetMapping("/{id}")
     public String getItem(@PathVariable("id") int id, Model model) {
         model.addAttribute("item", this.items.getItem(id));
         return "item";
     }
 
-    @GetMapping("/addItem")
+    @GetMapping("/add")
     public String addItemForm(Model model) {
-        model.addAttribute("itemForForm", new ItemForForm());
+        model.addAttribute("itemCategoryForForm", new ItemCategoryForForm());
         model.addAttribute("categories", items.getCategories());
         return "itemForm";
     }
-    @PostMapping("/addItem")
-    public String addItem(@ModelAttribute ItemForForm itemForForm, Model model) {
-        Item item = new Item(itemForForm.getName(), itemForForm.getPrice(), itemForForm.getCategoryName() );
+
+    @PostMapping("/add")
+    public String addCategory(@ModelAttribute ItemCategoryForForm categoryForForm, Model model) {
+        ItemCategory itemCategory = new ItemCategory(categoryForForm.getName());
 
         Validator validator = validatorFactory.getValidator();
 
-        Set<ConstraintViolation<Item>> constraintViolations = validator.validate(item);
+        Set<ConstraintViolation<ItemCategory>> constraintViolations = validator.validate(itemCategory);
         List<String> messages;
         if (constraintViolations.size() > 0) {
             messages = new LinkedList<>();
-            for (ConstraintViolation<Item> violation : constraintViolations) {
+            for (ConstraintViolation<ItemCategory> violation : constraintViolations) {
                 System.out.println(violation.getMessage());
                 messages.add(violation.getMessage());
             }
 
-            model.addAttribute("itemForForm", new ItemForForm());
+            model.addAttribute("itemForForm", new ItemCategoryForForm());
             model.addAttribute("categories", items.getCategories());
             model.addAttribute("error", messages);
-            return "itemForm";
+            return "categoryForm";
         }
 
-        items.addItem(item);
+        items.addCategory(itemCategory);
         System.out.println("Valid Object");
         return "redirect:/items/";
 

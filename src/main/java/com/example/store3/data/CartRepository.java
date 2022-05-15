@@ -11,7 +11,6 @@ import java.util.List;
 @Repository
 @Getter
 public class CartRepository {
-//    HashMap<String, Item> itemsInCart = new HashMap<>();
     HashMap<Item, Integer> itemsInCart = new HashMap<>();
     List<HashMap<Item, Integer>> listOfOrders = new LinkedList<>();
     public CartRepository(){

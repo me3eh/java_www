@@ -16,6 +16,10 @@
         </span>
     <p><input type="submit" value="Submit" /></p>
 </form>
+<tr th:each="erro : ${error}">
+    <td th:text="${erro}"></td>
+</tr>
+<br/>
 <a th:href="@{/items/}">Return to items</a>
 
 </body>

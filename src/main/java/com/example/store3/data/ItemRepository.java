@@ -38,6 +38,10 @@ public class ItemRepository {
         this.items.add(item);
     }
 
+    public void addCategory(ItemCategory itemCategory) {
+        this.categories.add(itemCategory);
+    }
+
     public void removeItem(int id) {
         this.items.remove(id);
     }

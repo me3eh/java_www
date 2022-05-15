@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/items/addItem}" th:object="${itemCategoryForForm}" method="post">
+<p>Name: <input type="text" th:field="*{name}" onkeydown="return /[a-z]/i.test(event.key)" /></p>
+<p><input type="submit" value="Submit" /></p>
+</form>
+</body>
+</html>

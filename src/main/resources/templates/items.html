@@ -14,7 +14,6 @@
             <input type="hidden" name="_method" value="delete" />
             <button type="submit" >Delete</button>
         </form>
-<!--        <form action="#" th:action="@{'/cart/addItemToCart')}" th:method="post">-->
         <form action="#" th:action="@{'/cart/addToCart/{id}'(id=${iter.index})}" th:object="${itemForForm}" method="post">
             <p><input type="submit" value="Submit" /></p>
         </form>
