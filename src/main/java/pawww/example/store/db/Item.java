@@ -17,11 +17,18 @@ public class Item {
     private String name;
 
     @Column(name = "price", nullable = false)
-    private Double price;
+    private Float price;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category", nullable = false)
     private Category category;
 
+    public Item(String name, Float price, Category category) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+    }
+    public Item(){
 
+    }
 }

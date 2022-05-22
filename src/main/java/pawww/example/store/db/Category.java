@@ -1,5 +1,6 @@
 package pawww.example.store.db;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -21,6 +22,17 @@ public class Category {
     @Column(name = "name", nullable = false, length = 20)
     private String name;
 
+    public Category(Integer id) {
+        this.id = id;
+    }
 
+    public Category(String name){
+        this.name = name;
+    }
+    public Category(){
+    }
 
+    public String getName() {
+        return name;
+    }
 }

@@ -4,8 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pawww.example.store.data.Category;
+//import pawww.example.store.data.Category;
 
+import pawww.example.store.db.Category;
 import pawww.example.store.db.Item;
 import pawww.example.store.db.repositories.CategoryRepositoryDB;
 import pawww.example.store.repositories.Cart;
@@ -88,5 +89,9 @@ public class StoreService {
 
     public void buy(){
         this.cart.buy();
+    }
+
+    public Item isInCart(String name){
+        return cart.isInCart(name);
     }
 }

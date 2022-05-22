@@ -8,4 +8,5 @@ import java.util.List;
 public interface ItemRepositoryDB extends JpaRepository<Item, Integer> {
     List<Item> findByCategory_Name(String name);
 
+    List<Item> findByNameContaining(String name);
 }
